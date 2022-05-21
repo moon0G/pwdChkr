@@ -24,7 +24,7 @@ function getCharacteristics(pwd:any) {
 			}
 			if((/\W|_/g.test(pwd[i]) || pwd[i]==='_') && c.spl!=true) {
 				c.spl = true;
-				c.typs += 30;
+				c.typs += 32;
 				continue;
 			}
 			if(pwd[i].toUpperCase()===pwd[i] && c.upr!=true){
