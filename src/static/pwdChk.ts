@@ -3,13 +3,13 @@ class characteristics {
     low!: boolean;
     upr!: boolean;
     spl!: boolean;
-	typs!: number;
+    typs!: number;
 
-	contructor() {
-		this.num = false;
-		this.low = false;
-		this.upr = false;
-		this.spl = false;
+    contructor() {
+	this.num = false;
+	this.low = false;
+	this.upr = false;
+	this.spl = false;
 	}
 }
 
