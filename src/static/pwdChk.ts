@@ -17,33 +17,25 @@ function getCharacteristics(pwd:any) {
 	let c = new characteristics();
 	c.typs = 0;
 	    for(let i:number = 0; i<pwd.length; i++) {
-			if(c.num!=true) {
-				if(/\d/.test(pwd[i])) {
-					c.num = true;
-					c.typs += 10;
-					continue;
-				}
+			if(/\d/.test(pwd[i]) && c.num!=true) {
+				c.num = true;
+				c.typs += 10;
+				continue;
 			}
-			if(c.spl!=true) {
-				if(/\W|_/g.test(pwd[i]) || pwd[i]==='_') {
-					c.spl = true;
-					c.typs += 30;
-					continue;
-				}
+			if((/\W|_/g.test(pwd[i]) || pwd[i]==='_') && c.spl!=true) {
+				c.spl = true;
+				c.typs += 30;
+				continue;
 			}
-			if(c.upr!=true){
-				if(pwd[i].toUpperCase()===pwd[i]){
-					c.upr = true;
-					c.typs += 26;
-					continue;
-				}
+			if(pwd[i].toUpperCase()===pwd[i] && c.upr!=true){
+				c.upr = true;
+				c.typs += 26;
+				continue;
 			}
-			if(c.low!=true){
-				if(pwd[i].toLowerCase()===pwd[i]){
-					c.low = true;
-					c.typs += 26;
-					continue;
-				}
+			if(pwd[i].toLowerCase()===pwd[i] && c.low!=true){
+				c.low = true;
+				c.typs += 26;
+				continue;
 			}
 		}
 	return c;
