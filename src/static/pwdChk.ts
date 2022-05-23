@@ -4,16 +4,9 @@ class characteristics {
     upr!: boolean;
     spl!: boolean;
     typs!: number;
-
-    contructor() {
-	this.num = false;
-	this.low = false;
-	this.upr = false;
-	this.spl = false;
-	}
 }
 
-function getCharacteristics(pwd:any) {
+function timeToCrack(pwd:any) {
 	let c = new characteristics();
 	c.typs = 0;
 	for(let i:number = 0; i<pwd.length; i++) {
@@ -27,28 +20,31 @@ function getCharacteristics(pwd:any) {
 			c.typs += 32;
 			continue;
 		}
-		if(pwd[i].toUpperCase()===pwd[i] && c.upr!=true){
+		if(pwd[i].toUpperCase()===pwd[i] && c.upr!=true) {
 			c.upr = true;
 			c.typs += 26;
 			continue;
 		}
-		if(pwd[i].toLowerCase()===pwd[i] && c.low!=true){
+		if(pwd[i].toLowerCase()===pwd[i] && c.low!=true) {
 			c.low = true;
 			c.typs += 26;
 			continue;
 		}
 	}
-	return c;
+    var reqCalcs: number = c.typs ** pwd.length;
+    return reqCalcs/2600000000;
 }
 
-function maxCalculations(pwd:string, c:characteristics) {
-	return c.typs ** pwd.length;
+function toApropriateTime(time) {
+    var y: number = Math.round((time/(3600*24*7*52)*10)/10);
+    var w: number = Math.round((time/(3600*24*7)*10)/10);
+    var d: number = Math.round((time/(3600*24)*10)/10);
+    var h: number = Math.round(((time/3600)*10)/10);
+    var m: number = Math.round((time/(3600/60)*10)/10);
+    var displayTime: string = y > 0.5 ? y + " years" : w > 1 ? w + " weeks" : d > 1 ? d + " days" : h > 1 ? h + " hours" : m > 1 ? m + " minutes" : time + " seconds"; 
+    console.log(displayTime);
 }
 
-function onXCpu() { // i7-5600k 2.6ghz does 2.6e+9 (2,600,000,000c)ycles/second or 2.6e+9 (2,600,000,000)hertz (hz)
-
-}
-
-var pwd: string = "";
-var c = getCharacteristics("H3llo!");
-var calcs: number = maxCalculations(pwd, c);
+var pwd: string = "hello123";
+var time: number = timeToCrack(pwd);
+toApropriateTime(time);
