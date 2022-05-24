@@ -32,7 +32,7 @@ function timeToCrack(pwd:any) {
 		}
 	}
     var reqCalcs: number = c.typs ** pwd.length;
-    return reqCalcs/2600000000;
+    return reqCalcs/2600000000; // i7-5600k (from my research the most common cpu) has speed of 2.6ghz or 2,600,000,000hz meaning the cpu can do 2.6e+9 cycles a second
 }
 
 function toApropriateTime(time) {
