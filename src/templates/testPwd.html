@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #pwdForm {
+                border: 2px solid black;
+                margin: 10px;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <form id="pwdForm">
+            <input type="password" name="pwd"></input>
+        </form>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!--using jquery-->
+        <script type="text/javascript" src="{{url_for('static', filename='pwdChkr.js')}}"></script> <!--using custom module 'pwdChkr.js'-->
+        <script>
+            /*
+            var s = "whatever"; 
+            $.ajax({ 
+                url:"/ret",
+                type:"POST",
+                data: s
+            });
+            */
+            $('#pwdForm').on('input', function() {
+                var a = $('#pwdForm').serializeArray();
+                var calculations = timeToCrack(a[0]['value']);
+                var time = toApropriateTime(calculations);
+                console.log(time);
+           });
+        </script>
+    </body>
+</html>
