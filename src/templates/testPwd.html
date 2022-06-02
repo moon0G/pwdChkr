@@ -11,25 +11,36 @@
     </head>
     <body>
         <form id="pwdForm">
-            <input type="password" name="pwd"></input>
+            <input type="text" name="pwd"></input>
         </form>
+        <p id="complexity">No Password Inputed</p>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!--using jquery-->
-        <script type="text/javascript" src="{{url_for('static', filename='pwdChkr.js')}}"></script> <!--using custom module 'pwdChkr.js'-->
+        <script type="text/javascript" src="{{url_for('static', filename='pwdChkr.js')}}"></script> <!--using module 'pwdChkr.js'-->
         <script>
             /*
-            var s = "whatever"; 
-            $.ajax({ 
+            var s = "whatever";
+            $.ajax({
                 url:"/ret",
                 type:"POST",
                 data: s
             });
             */
-            $('#pwdForm').on('input', function() {
-                var a = $('#pwdForm').serializeArray();
-                var calculations = timeToCrack(a[0]['value']);
-                var time = toApropriateTime(calculations);
-                console.log(time);
-           });
+            $('#pwdForm').on('input', function() { // on input in the form
+                var a = $('#pwdForm').serializeArray(); // take the data
+                if(a[0]['value']!='') { // if there is something in the password field
+                    var calculations = timeToCrack(a[0]['value']); // pass it through to 'timeToCrack()'
+                    var time = toApropriateTime(calculations); // convert what you gathered from 'timeToCrack()' to the apropriate time with 'toApropriateTime()'
+                    console.log(time); // log it to the console
+                    
+                    if(time!="nil") {
+                        document.getElementById('complexity').innerHTML = "Your password takes " + time + " to crack!";
+                    }else { 
+                        document.getElementById('complexity').innerHTML = "Virtually no time to crack!";
+                    }
+                }else {
+                    document.getElementById('complexity').innerHTML = "No Password Inputed";
+                }
+            });
         </script>
     </body>
 </html>
