@@ -2,18 +2,44 @@
 <html>
     <head>
         <style>
-            #pwdForm {
-                border: 2px solid black;
-                margin: 10px;
-                padding: 10px;
+            html, body {
+                margin:0px;
+                height: 100%;
+            }
+            .container {
+                width: 100%;
+                height: 100%;
+                align-items: center;
             }
         </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     </head>
     <body>
-        <form id="pwdForm">
-            <input type="text" name="pwd"></input>
-        </form>
-        <p id="complexity">No Password Inputed</p>
+        <div class="container fluid">
+            <div class="row" id="nav">
+                <header class="d-flex justify-content-center py-3">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item" title="Homepage"><a href="/" class="nav-link">Home</a></li>
+                        <li class="nav-item" title="Check Your Password" ><a href="/check" class="nav-link active" aria-current="page">Check</a></li>
+                    </ul>
+                </header>
+            </div>
+
+            <div class="row">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div id="input">
+                        <form id="pwdform">
+                            <input type="password" name="pwd"></input>
+                        </form>
+                        <p id="complexity">No Password Inputed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+        <!-- ^ using bootstrap -->
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!--using jquery-->
         <script type="text/javascript" src="{{url_for('static', filename='pwdChkr.js')}}"></script> <!--using module 'pwdChkr.js'-->
         <script>
@@ -25,8 +51,8 @@
                 data: s
             });
             */
-            $('#pwdForm').on('input', function() { // on input in the form
-                var a = $('#pwdForm').serializeArray(); // take the data
+            $('#pwdform').on('input', function() { // on input in the form
+                var a = $('#pwdform').serializeArray(); // take the data
                 if(a[0]['value']!='') { // if there is something in the password field
                     var calculations = timeToCrack(a[0]['value']); // pass it through to 'timeToCrack()'
                     var time = toApropriateTime(calculations); // convert what you gathered from 'timeToCrack()' to the apropriate time with 'toApropriateTime()'
