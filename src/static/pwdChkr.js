@@ -6,7 +6,7 @@ var characteristics = /** @class */ (function () {
 function timeToCrack(pwd) {
     var c = new characteristics(); // initialise new class of characteristics
     c.typs = 0; // set c.typs to 0
-    for (var i = 0; i < pwd.length; i++) { // loop over ever address in the string 
+    for (var i = 0; i < pwd.length; i++) { // loop over every address in the string 
         if (/\d/.test(pwd[i]) && c.num != true) { // if the char is a decimal
             c.num = true; // set the existance of a number in a string to true
             c.typs += 10; // add 10 chars to the total amount of char pool
@@ -38,7 +38,8 @@ function toApropriateTime(time) {
     var d = Math.round((time / (3600 * 24) * 10) / 10); // also the same but for days
     var h = Math.round(((time / 3600) * 10) / 10); // hours
     var min = Math.round((time / (3600 / 60) * 10) / 10); // min
-    var displayTime = y > 0.916 ? y + " years" : mon > 1 ? mon + " months" : w > 1 ? w + " weeks" : d > 1 ? d + " days" : h > 1 ? h + " hours" : min > 1 ? min + " minutes" : time + " seconds";
+    time = Math.round((time*10)/10);
+    var displayTime = y > 0.916 ? y + " years" : mon > 1 ? mon + " months" : w > 1 ? w + " weeks" : d > 1 ? d + " days" : h > 1 ? h + " hours" : min > 1 ? min + " minutes" : time > 1 ?  time + " seconds" : "nil";
     //massive if block for appropriate time conversion
     return displayTime;
 }
