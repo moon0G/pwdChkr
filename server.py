@@ -1,6 +1,6 @@
 from flask import *
-import requests as netReq
 import json as j
+import random
 
 app = Flask(
         __name__,
@@ -18,12 +18,26 @@ def index():
 def password():
     return render_template("testPwd.html")
 
+@app.route('/randomWords')
+def randomWords():
+    words = ""
+    with open("static/words.json", 'r') as f:
+        f = f.read()
+        data = j.loads(f)
+        
+        for x in range(0, 4):
+            y = random.randint(0, 2465)
+            if data["data"][y] not in words:
+                words += data["data"][y] + ' '
+    
+    return render_template_string(f"{words[:-1]}")
+
 @app.route("/ret", methods=["POST", "GET"]) # method for return data from the frontend to the backend
 def ret():
     data = request.get_data().decode()
     print(data)
     return render_template_string('a')
 
-app.run("10.49.229.120", 3000, debug=True)
+app.run("192.168.1.151", 3000, debug=True)
+#10.49.229.120
 #
-#192.168.1.151
