@@ -1,6 +1,7 @@
 from flask import *
 import json as j
 import random
+from socket import gethostname, gethostbyname
 
 app = Flask(
         __name__,
@@ -38,6 +39,4 @@ def ret():
     print(data)
     return render_template_string('a')
 
-app.run("192.168.1.151", 3000, debug=True)
-#10.49.229.120
-#
+app.run(gethostbyname(gethostname()), 3000, debug=True)
