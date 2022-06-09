@@ -37,6 +37,6 @@ def randomWords():
 def ret():
     data = request.get_data().decode()
     print(data)
-    return render_template_string('a')
+    return render_template_string('Success: 200')
 
 app.run(gethostbyname(gethostname()), 3000, debug=True)
