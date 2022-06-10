@@ -25,12 +25,12 @@ def randomWords():
     with open("static/words.json", 'r') as f:
         f = f.read()
         data = j.loads(f)
-        
+
         for x in range(0, 4):
             y = random.randint(0, 2465)
             if data["data"][y] not in words:
                 words += data["data"][y] + ' '
-    
+                    
     return render_template_string(f"{words[:-1]}")
 
 @app.route("/ret", methods=["POST", "GET"]) # method for return data from the frontend to the backend
