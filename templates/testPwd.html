@@ -12,12 +12,17 @@
                 align-items: center;
             }
             #maincolumn {
-                width: 100%;
                 background-color: green;
             }
-            #idk {
-                width: 10px;
-                height: 10px;
+            #pwdinput {
+                border-radius: 10px;
+                width: 200px;
+                height: 35px;
+            }
+            #regenerate {
+                width: 200px;
+                height: 35px;
+                border-radius: 10px;
             }
         </style>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,7 +44,7 @@
                 <div class="d-flex justify-content-center align-items-center py-4">
                     <div id="input">
                         <form id="pwdform">
-                            <input type="password" name="pwd"></input>
+                            <input type="password" name="pwd" id="pwdinput"></input>
                         </form>
                     </div>
                 </div>
@@ -50,7 +55,7 @@
                     <p id="words"></p>
                 </div>
                 <div class="d-flex justify-content-center align-items-center py-2">
-                    <button onclick="getWords()" id="idk"></button>
+                    <button onclick="getWords()" id="regenerate">Regenerate</button>
                 </div>
             </div>
             
