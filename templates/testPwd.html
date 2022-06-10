@@ -12,7 +12,12 @@
                 align-items: center;
             }
             #maincolumn {
-                width: 100%
+                width: 100%;
+                background-color: green;
+            }
+            #idk {
+                width: 10px;
+                height: 10px;
             }
         </style>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +26,7 @@
     <body onload="getWords()">
         <div class="container fluid">
             <div class="row" id="nav">
-                <header class="d-flex justify-content-center py-3">
+                <header class="d-flex justify-content-center align-items-center py-3">
                     <ul class="nav nav-pills">
                         <li class="nav-item" title="Homepage"><a href="/" class="nav-link">Home</a></li>
                         <li class="nav-item" title="Check Your Password" ><a href="/check" class="nav-link active" aria-current="page">Check</a></li>
@@ -39,11 +44,16 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center align-items-center py-2">
-                <p id="complexity">No Password Inputed</p>
+                    <p id="complexity">No Password Inputed</p>
+                </div>
+                <div class="d-flex justify-content-center align-items-center py-2">
+                    <p id="words"></p>
+                </div>
+                <div class="d-flex justify-content-center align-items-center py-2">
+                    <button onclick="getWords()" id="idk"></button>
                 </div>
             </div>
-            <p id="words"></p>
-            <button onclick="getWords()"></button>
+            
         </div>
         <!--JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
