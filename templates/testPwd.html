@@ -11,6 +11,9 @@
                 height: 100%;
                 align-items: center;
             }
+            #maincolumn {
+                width: 100%
+            }
         </style>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -25,15 +28,18 @@
                     </ul>
                 </header>
             </div>
-
+            <br>
+            <br>
             <div class="row" id="maincolumn">
-                <div class="d-flex justify-content-center align-items-center">
+                <div class="d-flex justify-content-center align-items-center py-4">
                     <div id="input">
                         <form id="pwdform">
                             <input type="password" name="pwd"></input>
                         </form>
-                        <p id="complexity">No Password Inputed</p>
                     </div>
+                </div>
+                <div class="d-flex justify-content-center align-items-center py-2">
+                <p id="complexity">No Password Inputed</p>
                 </div>
             </div>
             <p id="words"></p>
@@ -70,7 +76,7 @@
                     success : function(response) {
                         document.getElementById('words').innerHTML = response;
                     }
-                });
+                }); 
             }
         </script>
     </body>
