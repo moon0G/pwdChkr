@@ -19,7 +19,7 @@ def index():
 def password():
     return render_template("testPwd.html")
 
-@app.route('/randomWords')
+@app.route("/randomWords")
 def randomWords():
     words = ""
     with open("static/words.json", 'r') as f:
