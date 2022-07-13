@@ -15,10 +15,6 @@ app = Flask(
 def index():
     return render_template("index.html")
 
-@app.route("/check")
-def password():
-    return render_template("testPwd.html")
-
 @app.route("/randomWords")
 def randomWords():
     words = ""
