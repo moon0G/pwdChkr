@@ -1,40 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style>
-            html, body {
-                margin:0px;
-                height: 100%;
-            }
-            html > body > h1 {
-                text-align: center;
-            }
-            html > body > .container {
-                width: 100%;
-                height: 100%;
-                align-items: center;
-            }
-            #maincolumn {
-                background-color: green;
-            }
-            #pwdinput {
-                border-radius: 10px;
-                width: 200px;
-                height: 35px;
-            }
-            #regenerate {
-                width: 200px;
-                height: 35px;
-                border-radius: 10px;
-            }
-        </style>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
     </head>
     <body onload="getWords()">
         <div class="container fluid">
             <br>
-            <h1>Test Password</h1>
+            <h1 class="heading">Test Password</h1>
             <br>
             <div class="row" id="maincolumn">
                 <div class="d-flex justify-content-center align-items-center py-4">
