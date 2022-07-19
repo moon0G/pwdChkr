@@ -18,7 +18,7 @@ def index():
 @app.route("/randomWords")
 def randomWords():
     words = ""
-    with open("static/words.json", 'r') as f:
+    with open("data/words.json", 'r') as f:
         f = f.read()
         data = j.loads(f)
 
