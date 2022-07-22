@@ -48,7 +48,7 @@ class handler:
             res = self.conn.cursor().execute(exe).fetchall()
 
             ret = []
-            if spec < 0:
+            if spec != None:
                 for row in res:
                     ret.append(row)
             else:
