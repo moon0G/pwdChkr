@@ -40,9 +40,15 @@ class handler:
         else:
             self.conn = sql.connect("cpudata.db")
 
-    def query(self, query):
+    def query(self, query, spec):
         if os.path.exists("../data/cpudata.db"):
             exe = "SELECT * FROM cpus WHERE CPU LIKE '%" + query + "%'"
             res = self.conn.cursor().execute(exe).fetchall()
-            for row in res:
-                print(f"{row[1]}: {row[4]}")
+
+            ret = []
+            if spec > 0:
+                for row in res:
+                    res.append(row)
+            else:
+                for row in res:
+                    res.append((row[1], row[spec]))
