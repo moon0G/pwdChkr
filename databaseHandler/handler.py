@@ -3,11 +3,13 @@ import sqlite3 as sql
 import os
 
 class handler:
-    def __init__(self):    
-        if not os.path.exists("../data/cpudata.db"):
-            open("../data/cpudata.db", 'w')
+    def __init__(self):
+        self.path = os.path.dirname(os.path.realpath(__file__)).replace("databaseHandler", "data")
+
+        if not os.path.exists(self.path + "\\cpudata.db"):
+            open(self.path + "\\cpudata.db", 'w')
             
-            self.conn = sql.connect("cpudata.db")
+            self.conn = sql.connect(self.path + "\\cpudata.db")
 
             self.conn.cursor().execute("""\
                 CREATE TABLE cpus(
@@ -24,7 +26,7 @@ class handler:
                 );
             """)
 
-            with open("../data/cpudata.csv", 'r') as cf:
+            with open(self.path + "\\cpudata.csv", 'r') as cf:
                 reader = csv.DictReader(cf)
                 query = "INSERT INTO cpus VALUES (?,?,?,?,?,?,?,?,?,?)"
 
@@ -38,15 +40,15 @@ class handler:
                     ))
                 self.conn.commit()
         else:
-            self.conn = sql.connect("cpudata.db")
+            self.conn = sql.connect(self.path + "\\cpudata.db")
 
     def query(self, query, spec):
-        if os.path.exists("../data/cpudata.db"):
+        if os.path.exists(self.path + "\\cpudata.db"):
             exe = "SELECT * FROM cpus WHERE CPU LIKE '%" + query + "%'"
             res = self.conn.cursor().execute(exe).fetchall()
 
             ret = []
-            if spec > 0:
+            if spec < 0:
                 for row in res:
                     ret.append(row)
             else:
