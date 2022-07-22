@@ -46,9 +46,3 @@ class handler:
             res = self.conn.cursor().execute(exe).fetchall()
             for row in res:
                 print(f"{row[1]}: {row[4]}")
-
-    
-
-
-
-
