@@ -48,7 +48,9 @@ class handler:
             ret = []
             if spec > 0:
                 for row in res:
-                    res.append(row)
+                    ret.append(row)
             else:
                 for row in res:
-                    res.append((row[1], row[spec]))
+                    ret.append((row[1], row[spec]))
+
+        return ret
