@@ -4,7 +4,7 @@ import os
 
 class handler:
     def __init__(self):    
-        if not os.path.exists("cpudata.db"):
+        if not os.path.exists("../data/cpudata.db"):
             open("../data/cpudata.db", 'w')
             
             self.conn = sql.connect("cpudata.db")
@@ -41,7 +41,7 @@ class handler:
             self.conn = sql.connect("cpudata.db")
 
     def query(self, query):
-        if os.path.exists("cpudata.db"):
+        if os.path.exists("../data/cpudata.db"):
             exe = "SELECT * FROM cpus WHERE CPU LIKE '%" + query + "%'"
             res = self.conn.cursor().execute(exe).fetchall()
             for row in res:
