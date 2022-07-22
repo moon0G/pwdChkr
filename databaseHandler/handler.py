@@ -53,6 +53,6 @@ class handler:
                     ret.append(row)
             else:
                 for row in res:
-                    ret.append((row[1], row[spec]))
+                    ret.append((row[1]))
 
         return ret
