@@ -5,7 +5,7 @@ from socket import gethostname, gethostbyname
 from databaseHandler import handler
 
 handle = handler.handler()
-cpus = handle.query("", 4)
+cpus = handle.query("", 0)
 
 app = Flask(
         __name__,
