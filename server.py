@@ -2,6 +2,7 @@ from flask import *
 import json as j
 import random
 from socket import gethostname, gethostbyname
+from databaseHandler import handler
 
 app = Flask(
         __name__,
