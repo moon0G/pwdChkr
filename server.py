@@ -37,8 +37,8 @@ def randomWords():
 def cpuinfo():
     handle = handler.handler() # flask freaks out when handler is initialised in a different thread, so its initialised every time here.
     req = request.args.get("cpu")
-    res = f"{handle.query(req, 0)}" # wrap the object in a string so flask can handle it
+    res = f"{handle.query(req, 'NOT NULL')}" # wrap the object in a string so flask can handle it
     
-    return render_template_string(res.replace('(', '[').replace(')', ']')) # need to make the tuple safe for js consumption (replacing paranthesis with square brackets)
+    return render_template_string(res.replace('(', '[').replace(')', ']').replace("'", '"')) # need to make the tuple safe for js consumption (replacing paranthesis with square brackets)
 
 app.run(gethostbyname(gethostname()), 3000, debug=True)

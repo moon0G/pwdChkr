@@ -21,6 +21,11 @@
                 <div class="d-flex justify-content-center align-items-center py-2">
                     <p id="complexity">No Password Inputed</p>
                 </div>
+                <br>
+                <div class="d-flex justify-content-center align-items-center py-2">
+                    <h2></h2>
+                </div>
+                <br>
                 <div class="d-flex justify-content-center align-items-center py-2">
                     <p id="words"></p>
                 </div>
@@ -60,8 +65,22 @@
                     type:"GET",
                     success : function(response) {
                         document.getElementById('words').innerHTML = response;
+                        console.log(response)
                     }
                 }); 
+            }
+
+            function getCpu(cpu) {
+                $.ajax ({
+                    url:"/cpuinfo?cpu=" + cpu,
+                    dataType:"text",
+                    type:"GET",
+                    success : function(response) {
+                        console.log(response);
+                        response = JSON.parse(response);
+                        console.log(response[0][1]);
+                    }
+                });
             }
         </script>
     </body>
