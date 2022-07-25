@@ -39,6 +39,6 @@ def cpuinfo():
     req = request.args.get("cpu")
     res = f"{handle.query(req, 'NOT NULL')}" # wrap the object in a string so flask can handle it
     
-    return render_template_string(res.replace('(', '[').replace(')', ']').replace("'", '"')) # need to make the tuple safe for js consumption (replacing paranthesis with square brackets)
+    return render_template_string(res.replace('(', '[').replace(')', ']').replace("'", '"')) # need to make the tuple safe for JS consumption (replacing paranthesis with square brackets)
 
 app.run(gethostbyname(gethostname()), 3000, debug=True)
