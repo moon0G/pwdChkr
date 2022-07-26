@@ -18,12 +18,19 @@
                         </form>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center align-items-center py-2">
-                    <p id="complexity">No Password Inputed</p>
-                </div>
                 <br>
                 <div class="d-flex justify-content-center align-items-center py-2">
-                    <h2></h2>
+                    <form>
+                        <select id="cpu">
+                            <option value="">Select a cpu</option>
+                            {% for option in cpus %}
+                                <option value={{option}}>{{option}}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </div>
+                <div class="d-flex justify-content-center align-items-center py-2">
+                    <p id="complexity">No Password Inputed and No Cpu Selected</p>
                 </div>
                 <br>
                 <div class="d-flex justify-content-center align-items-center py-2">
@@ -41,24 +48,9 @@
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!--using jquery-->
         <script type="text/javascript" src="{{url_for('static', filename='pwdChkr.js')}}"></script> <!--using module 'pwdChkr.js'-->
         <script>
-            $('#pwdform').on('input', function() { // on input in the form
-                var a = $('#pwdform').serializeArray(); // take the data
-                if(a[0]['value']!='') { // if there is something in the password field
-                    var calculations = timeToCrack(a[0]['value']); // pass it through to 'timeToCrack()'
-                    var time = toApropriateTime(calculations); // convert what you gathered from 'timeToCrack()' to the apropriate time with 'toApropriateTime()'
-                    console.log(time); // log it to the console
-                    
-                    if(time!="nil") {
-                        document.getElementById('complexity').innerHTML = "Your password takes " + time + " to crack!";
-                    }else { 
-                        document.getElementById('complexity').innerHTML = "Virtually no time to crack!";
-                    }
-                }else {
-                    document.getElementById('complexity').innerHTML = "No Password Inputed";
-                }
-            });
+            window.cpu = null;
 
-            function getWords() {
+            function getWords() { // makes call to backend route `/randomWords` which returns string of four random words
                 $.ajax({
                     url:"/randomWords",
                     dataType:"text",
@@ -70,17 +62,59 @@
                 }); 
             }
 
-            function getCpu(cpu) {
-                $.ajax ({
+            function getCpu(cpu) { // makes call to backend route `/cpuinfo` which fetches data from database
+                $.ajax({
                     url:"/cpuinfo?cpu=" + cpu,
                     dataType:"text",
                     type:"GET",
                     success : function(response) {
-                        response = JSON.parse(response);
-                        console.log(response[0][1]);
+                        var response = JSON.parse(response);
+                        window.cpu = response[0][4];
+                        display();
                     }
                 });
             }
+
+            function display() {
+                if(window.cpu!=null) {
+                    if(window.pwd[0]['value']!='') { // if there is something in the password field
+                        var calculations = timeToCrack(window.pwd[0]['value'], window.cpu); // pass it through to 'timeToCrack()'
+                        var time = toApropriateTime(calculations); // convert what you gathered from 'timeToCrack()' to the apropriate time with 'toApropriateTime()'
+                        console.log(time); // log it to the console
+                        
+                        if(time!="nil") {
+                            document.getElementById('complexity').innerHTML = "Your password takes " + time + " to crack!"; // if it takes time to crack
+                        }else { 
+                            document.getElementById('complexity').innerHTML = "Virtually no time to crack!"; // if it doesnt
+                        }
+                    }else {
+                        document.getElementById('complexity').innerHTML = "No Password Inputed"; // if the pwd field = '' or nothing
+                    }
+                }else {
+                    var state = document.getElementById('complexity');
+                    if(state=="No Password Inputed") {
+                        document.getElementById('complexity').innerHTML = "No Password Inputed and No Cpu Selected"; // if both the password and cpi fields have no input
+                    }else {
+                        document.getElementById('complexity').innerHTML = "No Cpu Selected"; // if just there is no cpu selected
+                    }
+                }
+            }
+
+            $('#pwdform').on('input', function() { // on input in the form
+                var pwd;
+                window.pwd = $('#pwdform').serializeArray();
+                display();
+            });
+
+            $('#cpu').on('change', function() { // on change in the cpu field
+                var cpu = $('#cpu').find(':selected').text();
+                if(cpu == "Select a cpu") {
+                    window.cpu = null;
+                    display();
+                }else {
+                    getCpu(cpu);
+                }
+            });
         </script>
     </body>
 </html>

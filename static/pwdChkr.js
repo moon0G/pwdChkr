@@ -3,7 +3,7 @@ var characteristics = /** @class */ (function () {
     }
     return characteristics;
 }());
-function timeToCrack(pwd) {
+function timeToCrack(pwd, cpu) {
     var c = new characteristics(); // initialise new class of characteristics
     c.typs = 0; // set c.typs to 0
     for (var i = 0; i < pwd.length; i++) { // loop over every address in the string 
@@ -29,7 +29,7 @@ function timeToCrack(pwd) {
         }
     }
     var reqCalcs = Math.pow(c.typs, pwd.length);
-    return reqCalcs / 2600000000; // i7-5600k (from my research the most common cpu) has speed of 2.6ghz or 2,600,000,000hz meaning the cpu can do 2.6e+9 cycles a second
+    return reqCalcs / cpu; // i7-5600k (from my research the most common cpu) has speed of 2.6ghz or 2,600,000,000hz meaning the cpu can do 2.6e+9 cycles a second
 }
 function toApropriateTime(time) {
     var y = Math.round((time / (3600 * 24 * 7 * 52) * 10) / 10); // math for converting seconds into years with weird js rouning
